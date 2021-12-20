@@ -1,1 +1,3 @@
-# codeanalyzer-metrics-calculation
+# Вычисление метрик программного кода
+
+сборка: mvn clean package
