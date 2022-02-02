@@ -1,0 +1,11 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+app:
+  version: 1.0.0
+
+server:
+  servlet:
+    context-path: /online
