@@ -1,11 +1,12 @@
 package com.uysnon.codeanalyzer.onlinecalculation.controller;
 
+import com.uysnon.codeanalyzer.core.adapters.TreeCreator;
+import com.uysnon.codeanalyzer.core.syntaxelements.ProjectTree;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import com.uysnon.codeanalyzer.core.adapters.TreeCreator;
-import com.uysnon.codeanalyzer.core.syntaxelements.ProjectTree;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -23,8 +24,8 @@ import java.util.zip.ZipInputStream;
 @RestController
 public class DockerProductController {
 
-    @PostMapping("/analyze/")
-    public ProjectTree getMessage(@RequestParam("file") MultipartFile file) throws IOException {
+    @PostMapping("/analyze")
+    public String getMessage(@RequestParam("file") MultipartFile file) throws IOException {
         UUID uuid = UUID.randomUUID();
         String unzipLocation = "temporary/" + uuid + "/";
         ZipInputStream zipInputStream = null;
@@ -49,11 +50,13 @@ public class DockerProductController {
         }
         TreeCreator treeCreator = new TreeCreator();
         ProjectTree projectTree = treeCreator.create(javaFiles);
-        return projectTree;
+        return projectTree.toString();
     }
 
     public static void unzipFiles(final ZipInputStream zipInputStream, final Path unzipFilePath) throws IOException {
-        try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(unzipFilePath.toAbsolutePath().toString()))) {
+        com.google.common.io.Files.createParentDirs(unzipFilePath.toFile());
+        try (BufferedOutputStream bos = new BufferedOutputStream(
+                new FileOutputStream(unzipFilePath.toAbsolutePath().toString()))) {
             byte[] bytesIn = new byte[1024];
             int read = 0;
             while ((read = zipInputStream.read(bytesIn)) != -1) {

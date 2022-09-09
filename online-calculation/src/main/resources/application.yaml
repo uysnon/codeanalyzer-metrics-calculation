@@ -8,4 +8,4 @@ app:
 
 server:
   servlet:
-    context-path: /online
+    context-path: /metrics

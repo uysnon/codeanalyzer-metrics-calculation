@@ -14,8 +14,8 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>16</maven.compiler.source>
-        <maven.compiler.target>16</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <spring.boot.dependencies.version>2.4.0</spring.boot.dependencies.version>
     </properties>
 
@@ -58,6 +58,11 @@
             <groupId>com.uysnon.codeanalyzer</groupId>
             <artifactId>core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.1-jre</version>
         </dependency>
     </dependencies>
 
