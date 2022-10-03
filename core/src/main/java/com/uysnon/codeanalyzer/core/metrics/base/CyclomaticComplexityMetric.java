@@ -6,7 +6,7 @@ import com.github.javaparser.ast.expr.ConditionalExpr;
 import com.github.javaparser.ast.stmt.*;
 
 public class CyclomaticComplexityMetric extends BlockMetric {
-    private static final String TITLE = "Циломатическая сложность";
+    private static final String TITLE = "CYCL_COMPL";
     private static final String DESCRIPTION = "Цикломатическая сложность кода";
 
     public CyclomaticComplexityMetric() {
@@ -31,20 +31,27 @@ public class CyclomaticComplexityMetric extends BlockMetric {
     }
 
     private boolean isConditionalConstruction(Node node) {
-        return (
+        boolean result =
                 node instanceof ConditionalExpr
                         || node instanceof CatchClause
                         || node instanceof WhileStmt
                         || node instanceof DoStmt
                         || node instanceof ForEachStmt
                         || node instanceof ForStmt
-                        || (node instanceof BinaryExpr
-                        && (
-                        (((BinaryExpr) node).getOperator() == BinaryExpr.Operator.EQUALS)
-                                || (((BinaryExpr) node).getOperator() == BinaryExpr.Operator.OR)
-                                || (((BinaryExpr) node).getOperator() == BinaryExpr.Operator.AND)
-                                || (((BinaryExpr) node).getOperator() == BinaryExpr.Operator.XOR))
-                ));
+                        || node instanceof SwitchStmt
+                        || node instanceof SwitchEntry;
+        if (result) {
+            return result;
+        }
+        if (node instanceof BinaryExpr && (
+                (((BinaryExpr) node).getOperator() == BinaryExpr.Operator.EQUALS)
+                        || (((BinaryExpr) node).getOperator() == BinaryExpr.Operator.OR)
+                        || (((BinaryExpr) node).getOperator() == BinaryExpr.Operator.AND)
+                        || (((BinaryExpr) node).getOperator() == BinaryExpr.Operator.XOR))
+        ) {
+            return true;
+        }
+        return false;
     }
 
     private void incCount() {

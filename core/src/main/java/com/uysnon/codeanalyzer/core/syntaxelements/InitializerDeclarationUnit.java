@@ -11,6 +11,14 @@ public class InitializerDeclarationUnit extends BlockUnit {
         addAllMetrics();
     }
 
+    public InitializerDeclaration getInitializerDeclaration() {
+        return initializerDeclaration;
+    }
+
+    public void setInitializerDeclaration(InitializerDeclaration initializerDeclaration) {
+        this.initializerDeclaration = initializerDeclaration;
+    }
+
     @Override
     public void calculateMetrics() {
         for (Metric metric : getMetrics()) {

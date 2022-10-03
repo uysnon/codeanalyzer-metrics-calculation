@@ -4,7 +4,7 @@ import com.github.javaparser.ast.Node;
 import com.uysnon.codeanalyzer.core.metrics.utils.BlockStatementsCounter;
 
 public class IfStatementsMetric extends BlockMetric {
-    private static final String TITLE = "if выражения";
+    private static final String TITLE = "IF_COUNT";
     private static final String DESCRIPTION = "Количество if выражений";
 
     public IfStatementsMetric() {

@@ -5,7 +5,7 @@ import com.github.javaparser.Range;
 import com.github.javaparser.ast.Node;
 
 public class CodeLinesMetric extends BaseMetric {
-    private static final String TITLE = "Количество строк кода";
+    private static final String TITLE = "LOC";
     private static final String DESCRIPTION = "Количество строк кода, занимаемое элементом";
 
     public CodeLinesMetric() {

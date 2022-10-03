@@ -4,7 +4,7 @@ import com.github.javaparser.ast.Node;
 import com.uysnon.codeanalyzer.core.metrics.utils.BlockStatementsCounter;
 
 public class ForEachStatementsMetric extends BlockMetric {
-    private static final String TITLE = "цикл foreach";
+    private static final String TITLE = "FOREACH_COUNT";
     private static final String DESCRIPTION = "Количество циклов foreach";
 
     public ForEachStatementsMetric() {

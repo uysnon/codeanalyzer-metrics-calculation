@@ -3,7 +3,7 @@ package com.uysnon.codeanalyzer.core.metrics.base;
 import com.github.javaparser.ast.Node;
 
 public class RABCMetric extends ABCMetric {
-    private static final String TITLE = "RABC метрика";
+    private static final String TITLE = "RABC";
     private static final String DESCRIPTION = "ABC метрика приходящаяся на 1 строку кода * 100";
 
     public RABCMetric() {

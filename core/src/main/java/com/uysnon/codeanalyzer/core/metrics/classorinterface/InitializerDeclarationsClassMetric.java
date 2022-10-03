@@ -4,7 +4,7 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.InitializerDeclaration;
 
 public class InitializerDeclarationsClassMetric extends ClassMetric {
-    private static final String TITLE = "Нестатические блоки инициализации";
+    private static final String TITLE = "INIT_BLOCKS_COUNT";
     private static final String DESCRIPTION = "Количество нестатических блоков инициализации";
 
     public InitializerDeclarationsClassMetric() {

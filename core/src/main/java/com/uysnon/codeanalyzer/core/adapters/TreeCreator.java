@@ -1,5 +1,6 @@
 package com.uysnon.codeanalyzer.core.adapters;
 
+import com.github.javaparser.ParseProblemException;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.*;
@@ -115,12 +116,17 @@ public class TreeCreator {
      */
     public ProjectTree create(List<File> files) throws FileNotFoundException {
         List<CompilationUnit> compilationUnits = new ArrayList<>();
+
         files.forEach(file -> {
             CompilationUnit cu = null;
             try {
                 cu = StaticJavaParser.parse(file);
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+            } catch (ParseProblemException ex) {
+                System.out.println(String.format("errror with file parsing: %s, exception: ", file.toString(), ex));
+                throw ex;
             }
             compilationUnits.add(cu);
         });

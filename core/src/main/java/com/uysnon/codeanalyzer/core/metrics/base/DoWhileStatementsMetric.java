@@ -4,7 +4,7 @@ import com.github.javaparser.ast.Node;
 import com.uysnon.codeanalyzer.core.metrics.utils.BlockStatementsCounter;
 
 public class DoWhileStatementsMetric extends BlockMetric {
-    private static final String TITLE = "цикл do-while";
+    private static final String TITLE = "DOWHILE_COUNT";
     private static final String DESCRIPTION = "Количество циклов do{..}while(statement);";
 
     public DoWhileStatementsMetric() {

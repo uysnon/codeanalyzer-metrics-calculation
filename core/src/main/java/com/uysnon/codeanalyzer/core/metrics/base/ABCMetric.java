@@ -7,7 +7,7 @@ import com.github.javaparser.ast.stmt.TryStmt;
 import com.github.javaparser.printer.PrettyPrinter;
 
 public class ABCMetric extends BlockMetric {
-    private static final String TITLE = "ABC метрика";
+    private static final String TITLE = "ABC";
     private static final String DESCRIPTION = "ABC метрика";
 
     public ABCMetric() {

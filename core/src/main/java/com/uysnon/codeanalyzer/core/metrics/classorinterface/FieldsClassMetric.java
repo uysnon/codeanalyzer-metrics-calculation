@@ -4,7 +4,7 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 
 public class FieldsClassMetric extends ClassMetric {
-    private static final String TITLE = "Поля";
+    private static final String TITLE = "FIELDS_COUNT";
     private static final String DESCRIPTION = "Количество полей";
 
     public FieldsClassMetric() {

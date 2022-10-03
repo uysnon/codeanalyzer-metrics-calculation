@@ -4,7 +4,7 @@ import com.github.javaparser.ast.Node;
 import com.uysnon.codeanalyzer.core.metrics.utils.BlockStatementsCounter;
 
 public class SwitchStatementsMetric extends BlockMetric {
-    private static final String TITLE = "switch выражения";
+    private static final String TITLE = "SWITCH_COUNT";
     private static final String DESCRIPTION = "Количество switch выражений";
 
     public SwitchStatementsMetric() {

@@ -4,15 +4,12 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.InitializerDeclaration;
 
 public class StaticInitializerDeclarationsClassMetric extends ClassMetric {
-    private static final String TITLE = "Статические блоки инициализации";
+    private static final String TITLE = "STATIC_INIT_BLOCKS_COUnT";
     private static final String DESCRIPTION = "Количество статических блоков инициализации";
 
     public StaticInitializerDeclarationsClassMetric() {
         setTitle(TITLE);
         setDescription(DESCRIPTION);
-        switch (getTitle()){
-            case "t3254":;
-        }
     }
 
     @Override
