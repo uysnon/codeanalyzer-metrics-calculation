@@ -9,6 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ExportReport {
     private String title;
+    private String description;
     private List<ReportUnit> reportUnit;
 
 }

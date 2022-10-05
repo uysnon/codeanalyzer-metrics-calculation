@@ -1,5 +1,6 @@
 package com.uysnon.codeanalyzer.core.adapters;
 
+import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseProblemException;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
@@ -7,7 +8,9 @@ import com.github.javaparser.ast.body.*;
 import com.uysnon.codeanalyzer.core.syntaxelements.*;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -120,8 +123,12 @@ public class TreeCreator {
         files.forEach(file -> {
             CompilationUnit cu = null;
             try {
-                cu = StaticJavaParser.parse(file);
-
+                FileInputStream fileInputStream = new FileInputStream(file);
+                try {
+                    cu = StaticJavaParser.parse(fileInputStream, StandardCharsets.UTF_8);
+                } catch (ParseProblemException e) {
+                    cu = StaticJavaParser.parse(fileInputStream, StandardCharsets.ISO_8859_1);
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (ParseProblemException ex) {

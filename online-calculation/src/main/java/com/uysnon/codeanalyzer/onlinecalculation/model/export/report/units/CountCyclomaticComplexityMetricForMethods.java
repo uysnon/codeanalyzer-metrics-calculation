@@ -1,7 +1,6 @@
 package com.uysnon.codeanalyzer.onlinecalculation.model.export.report.units;
 
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.DataTypes;
-import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportMetric;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportUnit;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportUnitTypes;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.report.ReportUnit;

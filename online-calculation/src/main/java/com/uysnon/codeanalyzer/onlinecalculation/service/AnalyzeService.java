@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class AnalyzeService {
@@ -55,8 +57,21 @@ public class AnalyzeService {
                                       List<ExportUnit> exportUnits) {
         List<ReportUnit> reportUnits = ReportUnitPacks.FULL.createPack();
         reportUnits.forEach(unit -> unit.fill(exportUnits));
+        String projectName = getProjectName(projectLocation.getJavaFiles().get(0).toString());
         return new ExportReport(
                 projectLocation.getProjectUUID().toString(),
+                projectName,
                 reportUnits);
+    }
+
+    private String getProjectName(String pathToAnyJavaFile) {
+        String regexp = "^temporary\\/.+?\\/(.+?)\\/.+$";
+        Pattern pattern = Pattern.compile(regexp);
+        Matcher matcher = pattern.matcher(pathToAnyJavaFile);
+        if (matcher.matches()) {
+            return matcher.group(1);
+        } else {
+            return "";
+        }
     }
 }
