@@ -65,7 +65,7 @@ public class AnalyzeService {
     }
 
     private String getProjectName(String pathToAnyJavaFile) {
-        String regexp = "^temporary\\/.+?\\/(.+?)\\/.+$";
+        String regexp = "^temporary[\\/\\\\].+?[\\/\\\\](.+?)[\\/\\\\].+$";
         Pattern pattern = Pattern.compile(regexp);
         Matcher matcher = pattern.matcher(pathToAnyJavaFile);
         if (matcher.matches()) {

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 
 @RestController
@@ -30,9 +32,11 @@ public class AnalyzeController {
 
     @PostMapping("/analyze/report")
     public ExportReport createExportReport(@RequestParam("file") MultipartFile file) throws IOException {
-        System.out.println("POST /analyze/report");
+        System.out.println("POST /analyze/report" );
+        Instant start = Instant.now();
         ExportReport exportReport= analyzeService.analyzeAndGetReport(file);
-        System.out.println("REPONSE /analyze/report");
+        Instant end = Instant.now();
+        System.out.println("REPONSE /analyze/report, duration: " + Duration.between(start, end));
         return exportReport;
     }
 }
