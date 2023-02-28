@@ -30,6 +30,9 @@ public class AnalyzeController {
 
     @PostMapping("/analyze/report")
     public ExportReport createExportReport(@RequestParam("file") MultipartFile file) throws IOException {
-        return analyzeService.analyzeAndGetReport(file);
+        System.out.println("POST /analyze/report");
+        ExportReport exportReport= analyzeService.analyzeAndGetReport(file);
+        System.out.println("REPONSE /analyze/report");
+        return exportReport;
     }
 }

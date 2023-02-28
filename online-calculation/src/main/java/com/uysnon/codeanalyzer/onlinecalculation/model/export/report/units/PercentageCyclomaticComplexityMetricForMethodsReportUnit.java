@@ -8,16 +8,16 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
-public class PercentageCyclomaticComplexityMetricForMethods extends ReportUnit {
+public class PercentageCyclomaticComplexityMetricForMethodsReportUnit extends ReportUnit {
     public static final String CODE = "PERCENTAGE_METHODS_WITH_CYCL_COMPL_IN_RANGE_%d_%d";
     public static final String DESCRIPTION =
-            "Отношение строк кода методов (конструкторов) с циломатической сложностью, лежащей в диапазоне" +
+            "Отношение строк кода методов (конструкторов) с цикломатической сложностью, лежащей в диапазоне" +
                     "[%d, %d] ко всем строкам кода в методах";
 
     private List<String> calculableUnitTypes;
     private Pair<Integer, Integer> bounds;
 
-    public PercentageCyclomaticComplexityMetricForMethods(
+    public PercentageCyclomaticComplexityMetricForMethodsReportUnit(
             Integer lowerBound,
             Integer upperBound) {
         bounds = Pair.of(lowerBound, upperBound);

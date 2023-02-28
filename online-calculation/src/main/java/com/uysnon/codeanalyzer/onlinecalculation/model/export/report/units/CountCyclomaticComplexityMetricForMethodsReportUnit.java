@@ -8,16 +8,16 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
-public class CountABCMetricForMethods extends ReportUnit {
-    public static final String CODE = "COUNT_METHODS_WITH_ABC_IN_RANGE_%d_%d";
+public class CountCyclomaticComplexityMetricForMethodsReportUnit extends ReportUnit {
+    public static final String CODE = "COUNT_METHODS_WITH_CYCL_COMPL_IN_RANGE_%d_%d";
     public static final String DESCRIPTION =
-            "Количество методов (конструкторов) с ABC метрикой, лежащей в диапазоне" +
+            "Количество методов (конструкторов) с цикломатической сложностью, лежащей в диапазоне" +
                     "[%d, %d]";
 
     private List<String> calculableUnitTypes;
     private Pair<Integer, Integer> bounds;
 
-    public CountABCMetricForMethods(
+    public CountCyclomaticComplexityMetricForMethodsReportUnit(
             Integer lowerBound,
             Integer upperBound) {
         bounds = Pair.of(lowerBound, upperBound);
@@ -35,7 +35,7 @@ public class CountABCMetricForMethods extends ReportUnit {
         List<ExportUnit> allUnits = getRecursiveUnits(units);
         Integer countMethodsWithCCinBounds = (int) allUnits.stream()
                 .filter(u -> (calculableUnitTypes.contains(u.getType())))
-                .map(u -> u.getMetrics().get("ABC"))
+                .map(u -> u.getMetrics().get("CYCL_COMPL"))
                 .mapToInt(m -> Integer.parseInt(m.getValue()))
                 .filter(i -> (i >= bounds.getLeft() && i<= bounds.getRight()))
                 .count();
