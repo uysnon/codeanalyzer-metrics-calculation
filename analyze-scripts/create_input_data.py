@@ -26,6 +26,12 @@ def createCsvWithBettaAndPassed(directory_with_inputs:list, filename:str):
                 break
         return result
 
+    def sendProjectToCalculator(zipPath: str):
+        with open(zipPath, 'rb') as f:
+            r = requests.post('http://localhost:8100/metrics/analyze/report', files={'file': f})
+            j = json.loads(r.content.decode('utf-8'))
+            return Report(**j)
+
     passedNames = [x[0] for x in directory_with_inputs]
     betaNames = [x[1] for x in directory_with_inputs]
 
@@ -57,42 +63,27 @@ def createCsvWithBettaAndPassed(directory_with_inputs:list, filename:str):
         for line in csv_lines:
             writer.writerow(line)
 
+base_path = 'D:\\radik\\diplom\\project\\input_data\\labs\\044'
+directory_with_inputs_2_lab = [
+    [f'{base_path}\\02', f'{base_path}\\02_beta'],
+]
 
-def sendProjectToCalculator(zipPath: str):
-    with open(zipPath, 'rb') as f:
-        r = requests.post('http://localhost:8080/metrics/analyze/report', files={'file': f})
-        j = json.loads(r.content.decode('utf-8'))
-        return Report(**j)
+directory_with_inputs_3_lab = [
+    [f'{base_path}\\03', f'{base_path}\\03_beta'],
+]
 
-# directory_with_inputs_2_lab = [
-#     ['/Users/avgorkin/radik/vkr/project/data/Java/7413/02', '/Users/avgorkin/radik/vkr/project/data/Java/7413/02/beta'],
-#     ['/Users/avgorkin/radik/vkr/project/data/Java/743/02', '/Users/avgorkin/radik/vkr/project/data/Java/743/02/beta'],
-# ]
-# createCsvWithBettaAndPassed(directory_with_inputs_2_lab, '7413_743_2lab.csv')
-#
+directory_with_inputs_4_lab = [
+    [f'{base_path}\\04', f'{base_path}\\04_beta'],
+]
+
 # directory_with_inputs_3_lab = [
 #     ['/Users/avgorkin/radik/vkr/project/data/Java/7413/03', '/Users/avgorkin/radik/vkr/project/data/Java/7413/03/beta'],
 #     ['/Users/avgorkin/radik/vkr/project/data/Java/743/03', '/Users/avgorkin/radik/vkr/project/data/Java/743/03/beta']
 # ]
-# createCsvWithBettaAndPassed(directory_with_inputs_3_lab, '7413_743_3lab.csv')
 
-# directory_with_inputs_0_2_lab = [
-#     ['/Users/avgorkin/radik/vkr/project/data/044/02', '/Users/avgorkin/radik/vkr/project/data/044/02/beta'],
-# ]
-# createCsvWithBettaAndPassed(directory_with_inputs_0_2_lab, '044_2lab.csv')
-#
-# directory_with_inputs_0_3_lab = [
-#     ['/Users/avgorkin/radik/vkr/project/data/044/03', '/Users/avgorkin/radik/vkr/project/data/044/03/beta'],
-# ]
-# createCsvWithBettaAndPassed(directory_with_inputs_0_3_lab, '044_3lab.csv')
-#
-# directory_with_inputs_0_4_lab = [
-#     ['/Users/avgorkin/radik/vkr/project/data/044/04', '/Users/avgorkin/radik/vkr/project/data/044/04/beta'],
-# ]
-# createCsvWithBettaAndPassed(directory_with_inputs_0_4_lab, '044_4lab.csv')
-
-sendProjectToCalculator("/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/src.zip")
-
+createCsvWithBettaAndPassed(directory_with_inputs_2_lab, '2lab.csv')
+createCsvWithBettaAndPassed(directory_with_inputs_3_lab, '3lab.csv')
+createCsvWithBettaAndPassed(directory_with_inputs_4_lab, '3lab.csv')
 
 
 # with open('report.xls', 'rb') as f:
