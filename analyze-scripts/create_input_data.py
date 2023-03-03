@@ -109,7 +109,14 @@ jdk19_path = 'D:\\radik\\diplom\\project\\jdks\\jdk-19.0.2+7\\lib\\src.zip'
 
 
 # sendProjectsToCalculatorAndGetReport([jdk6_path, jd k7_path, jdk8_path, jdk11_path], 'jdk_full_p1.csv')
-sendProjectsToCalculatorAndGetReport([jdk13_path, jdk15_path, jdk16_path, jdk17_path, jdk19_path], 'jdk_full_p2.csv')
+# sendProjectsToCalculatorAndGetReport([jdk13_path, jdk15_path, jdk16_path, jdk17_path, jdk19_path], 'jdk_full_p2.csv')
+not_passed_work_1 = 'D:\\radik\diplom\\project\\input_data\\labs\\044\\02_beta\\02-02-Arkhipov.zip'
+not_passed_work_2 = 'D:\\radik\diplom\\project\\input_data\\labs\\044\\02_beta\\02-15-sattarova.zip'
+passed_work_1 = 'D:\\radik\\diplom\\project\\input_data\\labs\\044\\03\\03-19-Eminov.zip'
+passed_work2 = 'D:\\radik\\diplom\\project\\input_data\\labs\\044\\03\\03-07-Lanin.zip'
+
+
+sendProjectsToCalculatorAndGetReport([not_passed_work_1, not_passed_work_2, passed_work_1, passed_work2], 'test_data.csv')
 
 
 # with open('report.xls', 'rb') as f:
