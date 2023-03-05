@@ -38,6 +38,20 @@ public enum ReportUnitPacks {
             new PercentageABCMetricForMethodsReportUnit(101, 999)
             );
         }
+    },
+
+    MODEL {
+        @Override
+        public List<ReportUnit> createPack() {
+            return List.of(
+                    new AvgMethodLengthReportUnit(),
+                    new PercentageSmallMethodsReportUnit(15),
+                    new PercentageBigMethodsReportUnit(15),
+                    new PercentageBigMethodsReportUnit(30),
+                    new PercentageABCMetricForMethodsReportUnit(0, 10),
+                    new PercentageABCMetricForMethodsReportUnit(11, 999)
+            );
+        }
     }
     ;
     public abstract List<ReportUnit> createPack();

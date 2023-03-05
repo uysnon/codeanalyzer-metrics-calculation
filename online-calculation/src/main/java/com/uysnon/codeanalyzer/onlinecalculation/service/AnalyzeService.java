@@ -40,7 +40,8 @@ public class AnalyzeService {
         return CoreModelExporter.mapFromProjectTree(projectTree);
     }
 
-    public ExportReport analyzeAndGetReport(MultipartFile file) throws IOException {
+    public ExportReport analyzeAndGetReport(MultipartFile file,
+                                            ReportUnitPacks pack) throws IOException {
         UUID uuid = UUID.randomUUID();
         String unzipLocation = "temporary/" + uuid + "/";
         ProjectLocation projectLocation = archiveService.unzipProject(
@@ -50,12 +51,13 @@ public class AnalyzeService {
         TreeCreator treeCreator = new TreeCreator();
         ProjectTree projectTree = treeCreator.create(projectLocation.getJavaFiles());
         List<ExportUnit> exportUnits = CoreModelExporter.mapFromProjectTree(projectTree);
-        return createReport(projectLocation, exportUnits);
+        return createReport(projectLocation, exportUnits, pack);
     }
 
     private ExportReport createReport(ProjectLocation projectLocation,
-                                      List<ExportUnit> exportUnits) {
-        List<ReportUnit> reportUnits = ReportUnitPacks.FULL.createPack();
+                                      List<ExportUnit> exportUnits,
+                                      ReportUnitPacks pack) {
+        List<ReportUnit> reportUnits = pack.createPack();
         reportUnits.forEach(unit -> unit.fill(exportUnits));
         String projectName = getProjectName(projectLocation.getJavaFiles().get(0).toString());
         return new ExportReport(

@@ -10,6 +10,15 @@ import java.util.List;
 public class ExportReport {
     private String title;
     private String description;
-    private List<ReportUnit> reportUnit;
+    private List<ReportUnit> reportUnits;
 
+    public ReportUnit getReportUnitByCode(String code) {
+        if (code == null) {
+            return null;
+        }
+        return
+                reportUnits.stream()
+                        .filter(reportUnit -> code.equals(reportUnit.getCode()))
+                        .findAny().get();
+    }
 }

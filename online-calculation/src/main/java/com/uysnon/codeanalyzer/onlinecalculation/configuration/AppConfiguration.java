@@ -21,7 +21,7 @@ public class AppConfiguration {
 //initialize the MainInterpreter
         MainInterpreter.setJepLibraryPath(jepPath);
         JepConfig jepConf = new JepConfig();
-//        jepConf.addIncludePaths("D:\\java\\projects\\codeanalyzer-metrics-calculation\\online-calculation\\src\\main\\java)");
+        jepConf.addIncludePaths("D:\\java\\projects\\codeanalyzer-metrics-calculation\\analyze-scripts");
         jepConf.addIncludePaths(pythonFolder);
         return jepConf;
     }
