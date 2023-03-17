@@ -1,5 +1,6 @@
 package com.uysnon.codeanalyzer.onlinecalculation.model.export.report.units;
 
+import Designite.SourceModel.SM_Project;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportMetric;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportUnit;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportUnitTypes;
@@ -26,7 +27,7 @@ public class AvgMethodLengthReportUnit extends ReportUnit {
     }
 
     @Override
-    public ReportUnit fill(List<ExportUnit> units) {
+    public ReportUnit fill(List<ExportUnit> units, SM_Project designiteProject) {
         ExportMetric defaultMetric = new ExportMetric();
         defaultMetric.setValue("0");
         List<ExportUnit> allUnits = getRecursiveUnits(units);

@@ -1,5 +1,6 @@
 package com.uysnon.codeanalyzer.onlinecalculation.model.export.report.units;
 
+import Designite.SourceModel.SM_Project;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportMetric;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportUnit;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.DataTypes;
@@ -18,7 +19,7 @@ public class LinesCodeReportUnit extends ReportUnit {
     }
 
     @Override
-    public ReportUnit fill(List<ExportUnit> units) {
+    public ReportUnit fill(List<ExportUnit> units, SM_Project designiteProject) {
         ExportMetric defaultMetric = new ExportMetric();
         defaultMetric.setValue("0");
         Integer totalLoc = units.stream()

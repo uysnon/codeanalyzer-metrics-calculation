@@ -8,6 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<modules>
 		<module>core</module>
+		<module>designite-java</module>
 		<module>online-calculation</module>
 	</modules>
 	<name>metrics</name>

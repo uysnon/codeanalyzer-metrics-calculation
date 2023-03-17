@@ -1,5 +1,6 @@
 package com.uysnon.codeanalyzer.onlinecalculation.model.export.report.units;
 
+import Designite.SourceModel.SM_Project;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.DataTypes;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportUnit;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportUnitTypes;
@@ -31,7 +32,7 @@ public class CountABCMetricForMethodsReportUnit extends ReportUnit {
     }
 
     @Override
-    public ReportUnit fill(List<ExportUnit> units) {
+    public ReportUnit fill(List<ExportUnit> units, SM_Project designiteProject) {
         List<ExportUnit> allUnits = getRecursiveUnits(units);
         Integer countMethodsWithCCinBounds = (int) allUnits.stream()
                 .filter(u -> (calculableUnitTypes.contains(u.getType())))

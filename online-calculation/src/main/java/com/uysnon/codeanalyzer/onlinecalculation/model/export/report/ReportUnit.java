@@ -1,5 +1,6 @@
 package com.uysnon.codeanalyzer.onlinecalculation.model.export.report;
 
+import Designite.SourceModel.SM_Project;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportUnit;
 import lombok.Data;
 
@@ -12,8 +13,9 @@ public abstract class ReportUnit {
     private String description;
     private String value;
     private String type;
+    private String meta;
 
-    public abstract ReportUnit fill(List<ExportUnit> units);
+    public abstract ReportUnit fill(List<ExportUnit> units, SM_Project designiteProject);
 
     protected List<ExportUnit> getRecursiveUnits(List<ExportUnit> units) {
         List<ExportUnit> result = new ArrayList<>();
