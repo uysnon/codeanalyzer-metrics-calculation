@@ -10,7 +10,7 @@ DesigniteJava is a code quality assessment tool for code written in Java. It det
 	- Unnecessary Abstraction
 	- Unutilized Abstraction
 	- *Deficient Encapsulation*
-	- Unexploited Encapsulation
+	- *Unexploited Encapsulation*
 	- Broken Modularization
 	- Cyclic-Dependent Modularization
 	- *Insufficient Modularization*
@@ -23,16 +23,16 @@ DesigniteJava is a code quality assessment tool for code written in Java. It det
 	- Rebellious Hierarchy
 	- Wide Hierarchy
 * Detects 10 implementation smells
-	- Abstract Function Call From Constructor
+	- *Abstract Function Call From Constructor*
 	- Complex Conditional
 	- Complex Method
-	- Empty catch clause
+	- *Empty catch clause*
 	- Long Identifier
 	- Long Method
-	- Long Parameter List
+	- *Long Parameter List*
 	- Long Statement
-	- Magic Number
-	- Missing default
+	- *Magic Number*
+	- *Missing default*
 * Computes following object-oriented metrics
 	- LOC (Lines Of Code - at method and class granularity)
 	- CC (Cyclomatic Complexity - Method)

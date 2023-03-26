@@ -10,10 +10,12 @@ import com.uysnon.codeanalyzer.onlinecalculation.model.export.report.ReportUnit;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.util.CoreModelExporter;
 import com.uysnon.codeanalyzer.onlinecalculation.model.file.ProjectLocation;
 import com.uysnon.codeanalyzer.onlinecalculation.service.report.ReportUnitPacks;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,6 +63,8 @@ public class AnalyzeService {
         exportReport.setReportUnits(new ArrayList<>());
         List<ReportUnit> reportUnits = analyzeAndGetExportUnits(projectLocation, pack);
         exportReport.setReportUnits(reportUnits);
+
+        FileUtils.forceDelete(new File(unzipLocation.substring(0, unzipLocation.length() - 1)));
         return exportReport;
     }
 

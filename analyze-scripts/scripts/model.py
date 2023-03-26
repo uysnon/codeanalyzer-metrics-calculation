@@ -1,8 +1,13 @@
 class Report(object):
-    def __init__(self, title:str, description:str, reportUnit: list):
+
+    def __init__(self, title:str, description:str, reportUnits: list):
         self.title = title
         self.description = description
-        self.report_units = reportUnit
+        self.report_units = reportUnits
+        report_units_dict = {}
+        for reportUnit in self.report_units:
+            report_units_dict[reportUnit['code']] = reportUnit
+        self.report_units_dict = report_units_dict
 
     def __str__(self) -> str:
         return super().__str__()

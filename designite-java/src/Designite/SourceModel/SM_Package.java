@@ -32,6 +32,10 @@ public class SM_Package extends SM_SourceItem {
 		this.inputArgs = inputArgs;
 	}
 
+    public Map<SM_Type, List<DesignCodeSmell>> getDesignCodeSmellMapping() {
+        return smellMapping;
+    }
+
 	public SM_Project getParentProject() {
 		return parentProject;
 	}
