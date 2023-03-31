@@ -25,8 +25,8 @@ public class ModelController {
         this.analyzeService = analyzeService;
     }
 
-    @PostMapping("/model/calculate")
-    public String calculate(@RequestParam("file") MultipartFile file) throws IOException {
+    @PostMapping("/model/labs/calculate")
+    public String calculateLab(@RequestParam("file") MultipartFile file) throws IOException {
         String path = new ClassPathResource(
                 "model_code_metrics_4.h5").getFile().getAbsolutePath();
         try (SharedInterpreter sharedInterpreter = new SharedInterpreter()) {
@@ -48,6 +48,28 @@ public class ModelController {
             } else {
                 return String.format(Locale.US, "BAD", result);
             }
+        }
+    }
+
+    @PostMapping("/model/calculate")
+    public String calculate(@RequestParam("file") MultipartFile file) throws IOException {
+        String path = new ClassPathResource(
+                "all_projects_model_final.h5").getFile().getAbsolutePath();
+        try (SharedInterpreter sharedInterpreter = new SharedInterpreter()) {
+            sharedInterpreter.eval("from tensorflow import keras");
+            sharedInterpreter.eval(String.format("model = keras.models.load_model(\"%s\")", StringEscapeUtils.escapeEcmaScript(path)));
+            ExportReport exportReport = analyzeService.analyzeAndGetReport(file, ReportUnitPacks.ALL_PROJECTS_MODEl);
+            sharedInterpreter.eval(String.format(Locale.US, "result = model.predict([[%8.6f,%8.6f,%8.6f,%8.6f]])[0][0]",
+                    (getDoublePropertyFromExportReport(exportReport, "LOC") - 12216.50) / 41282.15,
+                    (getDoublePropertyFromExportReport(exportReport, "CODE_SMELLS_COUNT") - 423.10) / 1812,
+                    getDoublePropertyFromExportReport(exportReport, "PERCENTAGE_VOLUME_METHODS_WITH_LENGTH_LESS_THAN_15"),
+                    getDoublePropertyFromExportReport(exportReport, "PERCENTAGE_VOLUME_METHODS_WITH_LENGTH_MORE_THAN_60")
+            ));
+            float result = ((float[]) sharedInterpreter.getValue("result"))[0];
+
+            result *= 100;
+
+            return String.valueOf(result);
         }
     }
 

@@ -45,6 +45,18 @@ public enum ReportUnitPacks {
                     new PercentageABCMetricForMethodsReportUnit(11, 999)
             );
         }
+    },
+
+    ALL_PROJECTS_MODEl {
+        @Override
+        public List<ReportUnit> createPack() {
+            return List.of(
+                    new LinesCodeReportUnit(),
+                    new TotalCodeSmellsCountReportUnit(),
+                    new PercentageSmallMethodsReportUnit(15),
+                    new PercentageBigMethodsReportUnit(60)
+            );
+        }
     };
 
     public abstract List<ReportUnit> createPack();

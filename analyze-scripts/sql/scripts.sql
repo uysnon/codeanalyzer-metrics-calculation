@@ -16,7 +16,7 @@ where number BETWEEN 44001 and 55000;
 select count(*) as alll
 from calculated_data;
 
-select avg("LOC")
+select sum("LOC")
 from calculated_data
 
 
@@ -52,6 +52,12 @@ select 1 - ((((("SCORE") - 19.36) / 17.69) + 1) / 2)                 as score,
        "PERCENTAGE_METHODS_WITH_CYCL_COMPL_IN_RANGE_21_999"          as cc_21_999,
        "PERCENTAGE_METHODS_WITH_CYCL_COMPL_IN_RANGE_41_999"          as cc_31_999
 from calculated_data;
+
+-- вычислние персентилей score
+p * N / 100
+
+
+
 
 select *
 from calculated_data_standard
