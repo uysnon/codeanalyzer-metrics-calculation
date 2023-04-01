@@ -53,11 +53,11 @@ public class ModelController {
 
     @PostMapping("/model/calculate")
     public String calculate(@RequestParam("file") MultipartFile file) throws IOException {
-        String path = new ClassPathResource(
+        String pathModel = new ClassPathResource(
                 "all_projects_model_final.h5").getFile().getAbsolutePath();
         try (SharedInterpreter sharedInterpreter = new SharedInterpreter()) {
             sharedInterpreter.eval("from tensorflow import keras");
-            sharedInterpreter.eval(String.format("model = keras.models.load_model(\"%s\")", StringEscapeUtils.escapeEcmaScript(path)));
+            sharedInterpreter.eval(String.format("model = keras.models.load_model(\"%s\")", StringEscapeUtils.escapeEcmaScript(pathModel)));
             ExportReport exportReport = analyzeService.analyzeAndGetReport(file, ReportUnitPacks.ALL_PROJECTS_MODEl);
             sharedInterpreter.eval(String.format(Locale.US, "result = model.predict([[%8.6f,%8.6f,%8.6f,%8.6f]])[0][0]",
                     (getDoublePropertyFromExportReport(exportReport, "LOC") - 12216.50) / 41282.15,
@@ -67,9 +67,18 @@ public class ModelController {
             ));
             float result = ((float[]) sharedInterpreter.getValue("result"))[0];
 
-            result *= 100;
+            String pathScores = new ClassPathResource(
+                    "all_scores_sorted").getFile().getAbsolutePath();
+            sharedInterpreter.eval(String.format("import pandas as pd"));
+            sharedInterpreter.eval(String.format("from scipy import stats"));
+            sharedInterpreter.eval(String.format("data_from_file = pd.read_csv(r'%s')['score']", pathScores));
+            System.out.println(String.format(Locale.US, "resultPercentil = stats.percentileofscore(data_from_file, %7.6f)", result));
+            sharedInterpreter.eval(String.format(Locale.US, "resultPercentil = stats.percentileofscore(data_from_file, %7.6f)", result));
+            Double resultPercentil = (Double) sharedInterpreter.getValue("resultPercentil");
 
-            return String.valueOf(result);
+            String answer = String.format("Result = %5.2f points, your project better than %5.2f%% other", result, resultPercentil);
+
+            return answer;
         }
     }
 
