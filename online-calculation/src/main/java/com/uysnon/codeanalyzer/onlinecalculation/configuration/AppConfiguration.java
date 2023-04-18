@@ -6,6 +6,7 @@ import jep.SharedInterpreter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @Configuration
 public class AppConfiguration {
@@ -24,6 +25,16 @@ public class AppConfiguration {
         jepConf.addIncludePaths("D:\\java\\projects\\codeanalyzer-metrics-calculation\\analyze-scripts");
         jepConf.addIncludePaths(pythonFolder);
         return jepConf;
+    }
+
+    @Bean
+    public CommonsRequestLoggingFilter requestLoggingFilter() {
+        CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
+        loggingFilter.setIncludeClientInfo(true);
+        loggingFilter.setIncludeQueryString(true);
+        loggingFilter.setIncludePayload(true);
+        loggingFilter.setMaxPayloadLength(64000);
+        return loggingFilter;
     }
 
 }

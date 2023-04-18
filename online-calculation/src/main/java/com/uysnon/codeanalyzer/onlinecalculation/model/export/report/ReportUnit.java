@@ -3,11 +3,13 @@ package com.uysnon.codeanalyzer.onlinecalculation.model.export.report;
 import Designite.SourceModel.SM_Project;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportUnit;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 public abstract class ReportUnit {
     private String code;
     private String description;

@@ -1,4 +1,6 @@
 management:
+  server:
+    port: 8100
   endpoints:
     web:
       exposure:
@@ -7,9 +9,9 @@ app:
   version: 1.0.0
 
 server:
+  port: 8090
   servlet:
     context-path: /metrics
-
 
 spring:
   http:
