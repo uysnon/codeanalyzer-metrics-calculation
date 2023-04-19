@@ -10,11 +10,11 @@ import Designite.smells.models.ImplementationCodeSmell;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.DataTypes;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportUnit;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.report.ReportUnit;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
 public class TotalCodeSmellsCountReportUnit extends ReportUnit {
     public static final String CODE = "CODE_SMELLS_COUNT";
     public static final String DESCRIPTION = "Количество code smells";

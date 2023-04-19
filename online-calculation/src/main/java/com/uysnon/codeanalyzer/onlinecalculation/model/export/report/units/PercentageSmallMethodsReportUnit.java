@@ -6,9 +6,11 @@ import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportUnit;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportUnitTypes;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.DataTypes;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.report.ReportUnit;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@NoArgsConstructor
 public class PercentageSmallMethodsReportUnit extends ReportUnit{
     public static final String CODE = "PERCENTAGE_VOLUME_METHODS_WITH_LENGTH_LESS_THAN_%d";
     public static final String DESCRIPTION =

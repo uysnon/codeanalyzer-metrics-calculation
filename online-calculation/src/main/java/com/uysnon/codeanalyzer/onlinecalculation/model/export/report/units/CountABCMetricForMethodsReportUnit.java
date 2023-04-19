@@ -5,10 +5,12 @@ import com.uysnon.codeanalyzer.onlinecalculation.model.export.DataTypes;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportUnit;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.ExportUnitTypes;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.report.ReportUnit;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
+@NoArgsConstructor
 public class CountABCMetricForMethodsReportUnit extends ReportUnit {
     public static final String CODE = "COUNT_METHODS_WITH_ABC_IN_RANGE_%d_%d";
     public static final String DESCRIPTION =
