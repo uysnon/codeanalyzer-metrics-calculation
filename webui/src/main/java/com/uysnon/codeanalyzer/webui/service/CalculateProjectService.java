@@ -1,6 +1,7 @@
 package com.uysnon.codeanalyzer.webui.service;
 
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.report.ExportReport;
+import com.uysnon.codeanalyzer.webui.repository.ExportReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -17,6 +18,12 @@ public class CalculateProjectService {
 
     private String calculatorUrl;
     private RestTemplate restTemplate;
+    private ExportReportRepository exportReportRepository;
+
+    @Autowired
+    public void setExportReportRepository(ExportReportRepository exportReportRepository) {
+        this.exportReportRepository = exportReportRepository;
+    }
 
     @Autowired
     public void setCalculatorUrl(@Value("${calculator.url}") String calculatorUrl) {
@@ -28,13 +35,18 @@ public class CalculateProjectService {
         this.restTemplate = restTemplate;
     }
 
-    public void calculate(MultipartFile multipartFile) throws IOException {
+    public Long calculate(MultipartFile multipartFile) throws IOException {
         HttpEntity<MultiValueMap<String, Object>> requestEntity = getRequestEntity(multipartFile);
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<ExportReport> response = restTemplate
                 .postForEntity(calculatorUrl, requestEntity, ExportReport.class);
         ExportReport exportReport = response.getBody();
+        return exportReportRepository.save(exportReport);
+    }
+
+    public ExportReport getExportReport(Long id) {
+        return exportReportRepository.get(id);
     }
 
     private HttpEntity<MultiValueMap<String, Object>> getRequestEntity(MultipartFile multipartFile) throws IOException {
