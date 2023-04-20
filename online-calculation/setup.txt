@@ -1,0 +1,5 @@
+install jep
+1. pip install jep
+setup environment variables
+2. DYLD_LIBRARY_PATH = /opt/homebrew/lib/python3.9/site-packages/jep
+3. ANALYZE_SCRIPTS_PATH = /Users/avgorkin/radik/vkr/project/metrics/analyze-scripts

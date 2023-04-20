@@ -34,7 +34,7 @@ public class CalculateProjectService {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<ExportReport> response = restTemplate
                 .postForEntity(calculatorUrl, requestEntity, ExportReport.class);
-        int a =1;
+        ExportReport exportReport = response.getBody();
     }
 
     private HttpEntity<MultiValueMap<String, Object>> getRequestEntity(MultipartFile multipartFile) throws IOException {

@@ -3,6 +3,8 @@ package com.uysnon.codeanalyzer.onlinecalculation.controller;
 import com.uysnon.codeanalyzer.onlinecalculation.model.export.report.ExportReport;
 import com.uysnon.codeanalyzer.onlinecalculation.service.AnalyzeService;
 import com.uysnon.codeanalyzer.onlinecalculation.service.report.ReportUnitPacks;
+import jep.Interpreter;
+import jep.JepConfig;
 import jep.SharedInterpreter;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,13 @@ import java.util.Locale;
 public class ModelController {
     private AnalyzeService analyzeService;
 
+    private JepConfig jepConfig;
+
+    @Autowired
+    public void setJepConfig(JepConfig jepConfig) {
+        this.jepConfig = jepConfig;
+    }
+
     @Autowired
     public void setAnalyzeService(AnalyzeService analyzeService) {
         this.analyzeService = analyzeService;
@@ -29,7 +38,8 @@ public class ModelController {
     public String calculateLab(@RequestParam("file") MultipartFile file) throws IOException {
         String path = new ClassPathResource(
                 "model_code_metrics_4.h5").getFile().getAbsolutePath();
-        try (SharedInterpreter sharedInterpreter = new SharedInterpreter()) {
+        Interpreter sharedInterpreter = jepConfig.createSubInterpreter();
+//        try (SharedInterpreter sharedInterpreter = new SharedInterpreter()) {
             sharedInterpreter.eval("from tensorflow import keras");
             sharedInterpreter.eval(String.format("model = keras.models.load_model(\"%s\")", StringEscapeUtils.escapeEcmaScript(path)));
             ExportReport exportReport = analyzeService.analyzeAndGetReport(file, ReportUnitPacks.MODEL);
@@ -48,7 +58,7 @@ public class ModelController {
             } else {
                 return String.format(Locale.US, "BAD", result);
             }
-        }
+//        }
     }
 
     @PostMapping("/model/calculate")

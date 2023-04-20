@@ -1,5 +1,6 @@
 package com.uysnon.codeanalyzer.onlinecalculation.model.export.report;
 
+import com.uysnon.codeanalyzer.onlinecalculation.model.export.ModelCall;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ public class ExportReport {
     private String title;
     private String description;
     private List<ReportUnit> reportUnits;
+    private ModelCall modelCall;
 
     public ReportUnit getReportUnitByCode(String code) {
         if (code == null) {
