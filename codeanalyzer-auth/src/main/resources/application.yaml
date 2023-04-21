@@ -11,3 +11,7 @@ auth:
 server:
   port:
     8092
+
+spring:
+  resources:
+    static-locations: 'classpath:/static/,classpath:/static/vendor/,classpath:/static/custom/:'

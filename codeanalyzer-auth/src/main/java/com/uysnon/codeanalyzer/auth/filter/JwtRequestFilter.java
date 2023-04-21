@@ -33,10 +33,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        Cookie[] cookies = request.getCookies();
 
-        Cookie jwtCookie = Arrays.stream(request.getCookies()).filter(
-                cookie -> "codeanalyzer-authorization".equals(cookie.getName())
-        ).findFirst().orElseGet(()->null);
+        Cookie jwtCookie = null;
+        if (cookies != null) {
+            jwtCookie = Arrays.stream(cookies).filter(
+                    cookie -> "codeanalyzer-authorization".equals(cookie.getName())
+            ).findFirst().orElseGet(() -> null);
+        }
 
         String jwt = null;
         if (jwtCookie != null) {
