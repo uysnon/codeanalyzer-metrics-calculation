@@ -9,6 +9,7 @@
 	<modules>
 		<module>core</module>
 		<module>designite-java</module>
+		<module>codeanalyzer-auth</module>
 		<module>online-calculation</module>
         <module>webui</module>
     </modules>

@@ -1,0 +1,13 @@
+default:
+  onlinecalculation-url: http://localhost:8100/online
+
+communication:
+  service:
+    onlinecalculation: ${ONLINE_CALCULATION_SERVICE_URL:${default.onlinecalculation-url}}
+
+auth:
+  secret_private: 123
+
+server:
+  port:
+    8092
