@@ -29,14 +29,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-                .antMatchers( "/static/**","/resources/**", "/js/**", "/css/**", "/images/**");
+//        web.ignoring()
+//                .antMatchers( "/static/**","/resources/**", "/js/**", "/css/**", "/images/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/authenticate", "/login", "/**/*.js", "/**/*.css").permitAll()
+                .authorizeRequests().antMatchers("/authenticate", "/login", "/login/**", "/**/*.js", "/**/*.css").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
