@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,9 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 @Controller
 public class LoginController {
@@ -29,15 +33,20 @@ public class LoginController {
     @Autowired
     private JwtUtil jwtUtil;
 
+    // defaultValue = base64encode("/hello/user")
     @GetMapping("/login")
-    public String login() {
+    public String login(@RequestParam(name="page", defaultValue="L2hlbGxvL3VzZXI=")String page,
+                        Model model) {
+        model.addAttribute("page", page);
         return "login";
     }
 
     @PostMapping("/login/try")
     public String loginTry(@RequestParam("passwordForm") String password,
                            @RequestParam("loginForm") String login,
-                           HttpServletResponse response) {
+                           @RequestParam("page") String page,
+                           Model model,
+                           HttpServletResponse response) throws IOException {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -54,12 +63,15 @@ public class LoginController {
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         response.addCookie(cookie);
-        return "login";
+        byte[] decodedBytesOfPage = Base64.getDecoder().decode(page);
+        String pageDecoded = new String(decodedBytesOfPage, StandardCharsets.UTF_8);
+        model.addAttribute("page", pageDecoded);
+
+        return "redirect";
     }
 
     @ExceptionHandler(BadCredentialsException.class)
     public String onBadCrenetialsException() {
         return "redirect:/login";
     }
-
 }

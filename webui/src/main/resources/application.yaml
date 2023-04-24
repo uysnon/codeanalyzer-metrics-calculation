@@ -1,7 +1,18 @@
 server:
   port: 8091
 
+security:
+  filter-order: 5
+
+auth:
+  secret_private: 123
+
 spring:
+  security:
+    filter:
+      order: 5
+    resources:
+      static-locations: 'classpath:/static/,classpath:/static/vendor/,classpath:/static/custom/:'
   servlet:
     multipart:
       max-file-size: 10MB
@@ -9,6 +20,7 @@ spring:
 
 calculator:
   url: 'http://localhost:8090/metrics/analyze/report'
+
 
 management:
   server:

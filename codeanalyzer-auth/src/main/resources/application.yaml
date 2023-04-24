@@ -13,5 +13,14 @@ server:
     8092
 
 spring:
+  spring:
+    security:
+      filter:
+        order: 5
   resources:
     static-locations: 'classpath:/static/,classpath:/static/vendor/,classpath:/static/custom/:'
+
+security:
+  filter-order: 5
+
+# Security filter chain order.

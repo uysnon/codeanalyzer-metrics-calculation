@@ -13,6 +13,7 @@ import com.uysnon.codeanalyzer.onlinecalculation.model.file.ProjectLocation;
 import com.uysnon.codeanalyzer.onlinecalculation.service.report.ReportUnitPacks;
 import jep.SharedInterpreter;
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -76,29 +77,34 @@ public class AnalyzeService {
 
     private ExportReport addModelCallResultToExportUnit(ExportReport exportReport) throws IOException {
         ModelCall modelCall = new ModelCall();
-        try (SharedInterpreter sharedInterpreter = new SharedInterpreter()) {
-            String pathModel = new ClassPathResource(
-                    "all_projects_model_final.h5").getFile().getAbsolutePath();
-            sharedInterpreter.eval("from tensorflow import keras");
-            sharedInterpreter.eval(String.format("model = keras.models.load_model(\"%s\")", StringEscapeUtils.escapeEcmaScript(pathModel)));
-            sharedInterpreter.eval(String.format(Locale.US, "result = model.predict([[%8.6f,%8.6f,%8.6f,%8.6f]])[0][0]",
-                    (getDoublePropertyFromExportReport(exportReport, "LOC") - 12216.50) / 41282.15,
-                    (getDoublePropertyFromExportReport(exportReport, "CODE_SMELLS_COUNT") - 423.10) / 1812,
-                    getDoublePropertyFromExportReport(exportReport, "PERCENTAGE_VOLUME_METHODS_WITH_LENGTH_LESS_THAN_15"),
-                    getDoublePropertyFromExportReport(exportReport, "PERCENTAGE_VOLUME_METHODS_WITH_LENGTH_MORE_THAN_60")
-            ));
-            float result = ((float[]) sharedInterpreter.getValue("result"))[0];
-            modelCall.setScore(result * 100);
+        if (SystemUtils.IS_OS_WINDOWS) {
+            try (SharedInterpreter sharedInterpreter = new SharedInterpreter()) {
+                String pathModel = new ClassPathResource(
+                        "all_projects_model_final.h5").getFile().getAbsolutePath();
+                sharedInterpreter.eval("from tensorflow import keras");
+                sharedInterpreter.eval(String.format("model = keras.models.load_model(\"%s\")", StringEscapeUtils.escapeEcmaScript(pathModel)));
+                sharedInterpreter.eval(String.format(Locale.US, "result = model.predict([[%8.6f,%8.6f,%8.6f,%8.6f]])[0][0]",
+                        (getDoublePropertyFromExportReport(exportReport, "LOC") - 12216.50) / 41282.15,
+                        (getDoublePropertyFromExportReport(exportReport, "CODE_SMELLS_COUNT") - 423.10) / 1812,
+                        getDoublePropertyFromExportReport(exportReport, "PERCENTAGE_VOLUME_METHODS_WITH_LENGTH_LESS_THAN_15"),
+                        getDoublePropertyFromExportReport(exportReport, "PERCENTAGE_VOLUME_METHODS_WITH_LENGTH_MORE_THAN_60")
+                ));
+                float result = ((float[]) sharedInterpreter.getValue("result"))[0];
+                modelCall.setScore(result * 100);
 
-            String pathScores = new ClassPathResource(
-                    "all_scores_sorted").getFile().getAbsolutePath();
-            sharedInterpreter.eval(String.format("import pandas as pd"));
-            sharedInterpreter.eval(String.format("from scipy import stats"));
-            sharedInterpreter.eval(String.format("data_from_file = pd.read_csv(r'%s')['score']", pathScores));
-            System.out.println(String.format(Locale.US, "resultPercentil = stats.percentileofscore(data_from_file, %7.6f)", result));
-            sharedInterpreter.eval(String.format(Locale.US, "resultPercentil = stats.percentileofscore(data_from_file, %7.6f)", result));
-            Double resultPercentil = (Double) sharedInterpreter.getValue("resultPercentil");
-            modelCall.setPercentil(resultPercentil);
+                String pathScores = new ClassPathResource(
+                        "all_scores_sorted").getFile().getAbsolutePath();
+                sharedInterpreter.eval(String.format("import pandas as pd"));
+                sharedInterpreter.eval(String.format("from scipy import stats"));
+                sharedInterpreter.eval(String.format("data_from_file = pd.read_csv(r'%s')['score']", pathScores));
+                System.out.println(String.format(Locale.US, "resultPercentil = stats.percentileofscore(data_from_file, %7.6f)", result));
+                sharedInterpreter.eval(String.format(Locale.US, "resultPercentil = stats.percentileofscore(data_from_file, %7.6f)", result));
+                Double resultPercentil = (Double) sharedInterpreter.getValue("resultPercentil");
+                modelCall.setPercentil(resultPercentil);
+            }
+        } else {
+            modelCall.setScore(66.4);
+            modelCall.setPercentil(59.1);
         }
         exportReport.setModelCall(modelCall);
         return exportReport;
