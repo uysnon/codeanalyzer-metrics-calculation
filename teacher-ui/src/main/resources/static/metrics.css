@@ -1,0 +1,18 @@
+#metrics-table {
+    margin-left: 24px;
+}
+
+.big_number {
+    font-size: 54px;
+    text-align: center;
+    color: #0871fa;
+    font-weight: bold;
+}
+
+.text_center {
+    text-align: center;
+}
+
+.metrics-container {
+    align-items: center;
+}

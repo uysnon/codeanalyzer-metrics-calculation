@@ -12,6 +12,7 @@
 		<module>codeanalyzer-auth</module>
 		<module>online-calculation</module>
         <module>webui</module>
+        <module>teacher-ui</module>
     </modules>
 	<name>metrics</name>
 	<description>Analyze code and find code metrics values</description>

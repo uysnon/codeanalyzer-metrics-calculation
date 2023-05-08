@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Homepage</title>
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+    <script th:src="@{/jquery-3.5.1.min.js}"></script>
+    <script th:src="@{/bootstrap.min.js}"></script>
+    <script src="https://kit.fontawesome.com/ce1da8cfef.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!--Main Navigation-->
+<header>
+
+    <header th:insert="fragments/general :: navbar"></header>
+    <!-- Jumbotron -->
+    <div id="intro" class="p-5 text-center bg-light">
+        <h1 class="mb-0 h4">Обучение модели</h1>
+    </div>
+    <!-- Jumbotron -->
+</header>
+<!--Main Navigation-->
+
+<!--Main layout-->
+<main class="mt-4 mb-5">
+    <div class="container">
+        <!--Grid row-->
+        <form method="post" action="/model/generate">
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-3">
+                    <h3>Шаг 1. Создайте следующую структуру папок
+                        (file.zip - лабораторная работа)
+                    </h3>
+                    <br>
+                    <span>
+                        ./
+                        <br>
+                        ok/{file.zip}
+                        <br>
+                        error/{file.zip}
+                    </span>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-3">
+                    <h3>
+                        Шаг 2. Укажите путь к созданной папке
+                    </h3>
+                    <br>
+                    <input type="text" name="pathToLabs" placeholder="путь к папке с проектами"/>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-2">
+                    <h3>
+                        Шаг 3.
+                    </h3>
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4">
+                        Обучить модель
+                    </button>
+                </div>
+                <div class="col-md-1">
+                </div>
+            </div>
+        </form>
+    </div>
+
+</main>
+<!--Main layout-->
+
+<footer th:insert="fragments/general :: footer"></footer>
+
+</body>
+</html>

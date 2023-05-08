@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Homepage</title>
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/metrics.css}">
+    <script th:src="@{/jquery-3.5.1.min.js}"></script>
+    <script th:src="@{/bootstrap.min.js}"></script>
+    <script th:src="@{/metrics.js}"></script>
+    <script src="https://kit.fontawesome.com/ce1da8cfef.js" crossorigin="anonymous"></script>
+    <!--    <link rel="stylesheet" href="../static/metrics.css">-->
+</head>
+<body>
+
+<!--Main Navigation-->
+<header>
+
+    <header th:insert="fragments/general :: navbar"></header>
+    <!-- Jumbotron -->
+    <div id="intro" class="p-5 text-center bg-light">
+        <h1 class="mb-0 h4">Модель успешно сгенерирована!</h1>
+    </div>
+    <!-- Jumbotron -->
+</header>
+<!--Main Navigation-->
+
+<!--Main layout-->
+<main class="mt-4 mb-5">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            <h3>Шаг 4. Возможность заново обучить модель</h3>
+            <b th:text="${'Достигнутая точность на проверочной выборке: ' + userModel.accuracy}"/>
+            <br>
+            <br>
+            <span>Желаете попробовать обучить модель заново?</span>
+
+            <form method="post" action="/model/generate">
+                <input type="hidden" name="pathToLabs" th:value="${userModel.learnedPath}">
+                <button type="submit" class="btn btn-primary btn-block mb-4">
+                    Переобучить модель
+                </button>
+            </form>
+        </div>
+    </div>
+</main>
+<!--Main layout-->
+
+<footer th:insert="fragments/general :: footer"></footer>
+
+</body>
+</html>

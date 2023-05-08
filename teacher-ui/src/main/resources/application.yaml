@@ -1,0 +1,21 @@
+server:
+  port: 8091
+
+spring:
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 11MB
+
+calculator:
+  url: 'http://localhost:8090/metrics/analyze/report'
+
+
+management:
+  server:
+    port: 8101
+  endpoints:
+    web:
+      exposure:
+        include: "*"
