@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Homepage</title>
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/metrics.css}">
+    <script th:src="@{/jquery-3.5.1.min.js}"></script>
+    <script th:src="@{/bootstrap.min.js}"></script>
+    <script src="https://kit.fontawesome.com/ce1da8cfef.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/metrics.css">
+</head>
+<body>
+
+<!--Main Navigation-->
+<header>
+
+    <header th:insert="fragments/general :: navbar"></header>
+    <!-- Jumbotron -->
+    <div id="intro" class="p-5 text-center bg-light">
+        <h1 class="mb-0 h4">Список обученных моделей</h1>
+    </div>
+    <!-- Jumbotron -->
+</header>
+<!--Main Navigation-->
+
+<!--Main layout-->
+<main class="mt-4 mb-5">
+    <div class="row">
+        <div class="col-lg-7 mt-5 mb-5">
+            <table id="metrics-table" class="table table-bordered" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>Наименование</th>
+                    <th>Точность</th>
+                    <th>Действие</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="userModel : ${userModels}">
+                    <td th:text="${userModel.title}">Наименование метрики</td>
+                    <td th:text="${userModel.accuracy}">Значение метрики</td>
+                    <td>
+                        <form action="/calculate/select">
+                            <input type="hidden" name="id" th:value="${userModel.id}">
+                            <button type="submit" class="btn btn-primary btn-block mb-4">Проверить проект</button>
+                        </form>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+<!--Main layout-->
+
+<footer th:insert="fragments/general :: footer"></footer>
+
+</body>
+</html>

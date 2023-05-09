@@ -16,7 +16,7 @@
     <header th:insert="fragments/general :: navbar"></header>
     <!-- Jumbotron -->
     <div id="intro" class="p-5 text-center bg-light">
-        <h1 class="mb-0 h4">Обучение модели</h1>
+        <h1 class="mb-0 h4">Выберите файл с проектом в формате zip до 10Мб</h1>
     </div>
     <!-- Jumbotron -->
 </header>
@@ -26,46 +26,34 @@
 <main class="mt-4 mb-5">
     <div class="container">
         <!--Grid row-->
-        <form method="post" action="/model/generate">
+        <form action="/calculate/metrics" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" th:value="${id}">
             <div class="row">
-                <div class="col-md-1">
+
+                <!--Grid column-->
+                <div class="col-md-8 mb-4">
+                    <!--Section: Post data-mdb-->
+                    <section class="border-bottom mb-4">
+                        <input class="form-control" type="file"
+                               id="projectFile"
+                               name="projectFile"
+                               accept=".zip">
+                    </section>
+                    <!--Section: Sidebar-->
                 </div>
-                <div class="col-md-3">
-                    <h3>Шаг 1. Создайте следующую структуру папок
-                        (file.zip - лабораторная работа)
-                    </h3>
-                    <br>
-                    <span>
-                        ./
-                        <br>
-                        ok/{file.zip}
-                        <br>
-                        error/{file.zip}
-                    </span>
-                </div>
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-3">
-                    <h3>
-                        Шаг 2. Укажите путь к созданной папке
-                    </h3>
-                    <br>
-                    <input type="text" name="pathToLabs" placeholder="путь к папке с проектами"/>
-                </div>
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-2">
-                    <h3>
-                        Шаг 3.
-                    </h3>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-4 mb-4">
                     <!-- Submit button -->
                     <button type="submit" class="btn btn-primary btn-block mb-4">
-                        Обучить модель
+                        Рассчитать метрики
                     </button>
                 </div>
-                <div class="col-md-1">
-                </div>
+                <!--Grid column-->
+
             </div>
+            <!--Grid row-->
         </form>
     </div>
 
