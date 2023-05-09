@@ -33,7 +33,7 @@ public enum ReportUnitPacks {
         }
     },
 
-    MODEL {
+    LABS_MODEL {
         @Override
         public List<ReportUnit> createPack() {
             return List.of(

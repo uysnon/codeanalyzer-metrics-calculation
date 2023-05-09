@@ -11,7 +11,7 @@ public class InMemoryUserModelRepository implements UserModelRepository {
             .id(1L)
             .accuracy(0.78)
             .pathToFile("/src/labs/generated/model-1.h5")
-            .title("Некоторое название")
+            .title("")
             .build();
 
     @Override
@@ -22,5 +22,10 @@ public class InMemoryUserModelRepository implements UserModelRepository {
     @Override
     public void save(UserModel userModel) {
 
+    }
+
+    @Override
+    public void update(UserModel userModel) {
+        InMemoryUserModelRepository.userModel = userModel;
     }
 }

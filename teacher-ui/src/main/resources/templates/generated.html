@@ -57,6 +57,10 @@
                 <br>
                 <button type="submit" class="btn btn-primary btn-block mb-4">Сохранить</button>
             </form>
+            <div th:if="${messageSaved}">
+                <br>
+                <b th:text="${messageSaved}"></b>
+            </div>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-3">

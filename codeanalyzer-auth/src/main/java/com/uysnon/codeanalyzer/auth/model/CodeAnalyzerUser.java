@@ -13,6 +13,7 @@ import java.util.EnumSet;
 public class CodeAnalyzerUser implements UserDetails {
     private String username;
     private String password;
+    private String passwordSault;
     private String email;
     private EnumSet<Roles> roles;
     private boolean accountNonExpired;

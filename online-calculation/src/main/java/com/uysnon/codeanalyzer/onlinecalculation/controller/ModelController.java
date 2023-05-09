@@ -42,7 +42,7 @@ public class ModelController {
 //        try (SharedInterpreter sharedInterpreter = new SharedInterpreter()) {
             sharedInterpreter.eval("from tensorflow import keras");
             sharedInterpreter.eval(String.format("model = keras.models.load_model(\"%s\")", StringEscapeUtils.escapeEcmaScript(path)));
-            ExportReport exportReport = analyzeService.analyzeAndGetReport(file, ReportUnitPacks.MODEL);
+            ExportReport exportReport = analyzeService.analyzeAndGetReport(file, ReportUnitPacks.ALL_PROJECTS_MODEl);
             sharedInterpreter.eval(String.format(Locale.US, "result = model.predict([[%8.6f,%8.6f,%8.6f,%8.6f,%8.6f,%8.6f]])[0][0]",
                     getDoublePropertyFromExportReport(exportReport, "AVG_METHOD_LENGTH") / 50.0,
                     getDoublePropertyFromExportReport(exportReport, "PERCENTAGE_VOLUME_METHODS_WITH_LENGTH_LESS_THAN_15"),
