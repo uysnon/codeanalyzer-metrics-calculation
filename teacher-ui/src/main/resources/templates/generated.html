@@ -43,6 +43,34 @@
                 </button>
             </form>
         </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+
+            <h3>Шаг 5. Сохранение модели</h3>
+            <br>
+            <form action="/model/save" method="post">
+                <div class="form-outline md-3">
+                    <label class="form-label">Название</label>
+                    <input type="text" class="form-control" name="title" id="formTitle" th:value="${userModel.title}">
+                    <input type="hidden" name="id" th:value="${userModel.id}">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary btn-block mb-4">Сохранить</button>
+            </form>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            <h3>Шаг 6. Действия с моделью</h3>
+            <br>
+            <form action="/model/export" method="get">
+                <button type="submit>" class="btn btn-primary btn-block mb-4">Экспорт</button>
+                <input type="hidden" name="id" th:value="${userModel.id}">
+            </form>
+            <form action="/calculate/select" method="get">
+                <button type="submit>" class="btn btn-primary btn-block mb-4">Анализировать проект</button>
+                <input type="hidden" name="modelId" th:value="${userModel.id}">
+            </form>
+        </div>
     </div>
 </main>
 <!--Main layout-->
