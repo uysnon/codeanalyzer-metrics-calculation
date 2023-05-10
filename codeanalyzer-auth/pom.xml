@@ -6,21 +6,32 @@
 
     <groupId>com.uysnon.codeanalyzer</groupId>
     <artifactId>auth</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.6</version>
-        <relativePath/>
+        <artifactId>metrics</artifactId>
+        <groupId>com.uysnon.codeanalyzer</groupId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <name>gateway</name>
-    <description>Gateway to backend code analyze service</description>
     <properties>
         <java.version>16</java.version>
         <lombok.version>1.18.22</lombok.version>
+        <spring.boot.dependencies.version>2.4.0</spring.boot.dependencies.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -79,7 +90,6 @@
             <artifactId>thymeleaf-spring5</artifactId>
             <version>3.0.11.RELEASE</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -93,6 +103,9 @@
                         <goals>
                             <goal>repackage</goal>
                         </goals>
+                        <configuration>
+                            <classifier>exec</classifier>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
