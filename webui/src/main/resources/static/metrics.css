@@ -16,3 +16,11 @@
 .metrics-container {
     align-items: center;
 }
+
+.myForm
+{
+    width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
